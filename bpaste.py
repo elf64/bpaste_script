@@ -1,3 +1,4 @@
+#!/usr/bin/env python3.6
 import tkinter as tk
 import requests
 import pyperclip
@@ -72,13 +73,16 @@ class Paste:
         )
         return g.url
 
-
-get_clip = Text()
-bpaste = Paste(
-    get_clip.get_clipboard(),
-    "python3",
-    "1day"
-)
-url = bpaste.send_post()
-get_clip.clear_clipboard()
-get_clip.put_clipboard(url)
+try:
+    get_clip = Text()
+    bpaste = Paste(
+        get_clip.get_clipboard(),
+        "python3",
+        "1day"
+    )
+    url = bpaste.send_post()
+    get_clip.clear_clipboard()
+    get_clip.put_clipboard(url)
+except Exception as egg:
+    with open("bpaste.log", "a") as f:
+        f.write(egg + "\n")
